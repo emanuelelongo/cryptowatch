@@ -29,27 +29,27 @@ def window(stdscr, balances, prices, balancesInEur, totalInEur, totalInvested, l
     YELLOW = 5
     curses.init_pair(YELLOW, curses.COLOR_YELLOW, curses.COLOR_BLACK)
 
-    RED_ON_WHITE = 6
-    curses.init_pair(RED_ON_WHITE, curses.COLOR_RED, curses.COLOR_WHITE)
+    RED_ON_YELLOW = 6
+    curses.init_pair(RED_ON_YELLOW, curses.COLOR_RED, curses.COLOR_YELLOW)
 
-    BLUE_ON_WHITE = 7
-    curses.init_pair(BLUE_ON_WHITE, curses.COLOR_BLUE, curses.COLOR_WHITE)    
+    BLACK_ON_YELLOW = 7
+    curses.init_pair(BLACK_ON_YELLOW, curses.COLOR_BLACK, curses.COLOR_YELLOW)
 
     while (k != ord('q')):
+
+        stdscr.clear()
+        height, width = stdscr.getmaxyx()
 
         if k == ord('r'):
             updating = '--- UPDATING ---'
             offset = (width - 1 - len(updating)) / 2 
-            stdscr.addstr(height-1, 0, ' '*offset, curses.color_pair(RED_ON_WHITE))
-            stdscr.addstr(height-1, offset-1, '--- UPDATING ---', curses.color_pair(RED_ON_WHITE))
-            stdscr.addstr(height-1, offset+len(updating), ' '*offset, curses.color_pair(RED_ON_WHITE))
+            stdscr.addstr(height-1, 0, ' '*offset, curses.color_pair(RED_ON_YELLOW))
+            stdscr.addstr(height-1, offset-1, '--- UPDATING ---', curses.color_pair(RED_ON_YELLOW))
+            stdscr.addstr(height-1, offset+len(updating), ' '*offset, curses.color_pair(RED_ON_YELLOW))
             stdscr.refresh()
             refresh()
             return
 
-        stdscr.clear()
-        height, width = stdscr.getmaxyx()
-        
         stdscr.addstr(0, 0, 'BALANCE', curses.color_pair(CYAN))
         stdscr.addstr(0, 30, 'EXCHANGE', curses.color_pair(CYAN))
         stdscr.addstr(0, 60, 'VALUE', curses.color_pair(CYAN))
@@ -73,7 +73,7 @@ def window(stdscr, balances, prices, balancesInEur, totalInEur, totalInvested, l
         profit = balances.get('EUR', 0) + totalInEur - totalInvested
         stdscr.addstr(i+5, 60, 'EUR ' + formatMoney(profit), curses.color_pair(GREEN if profit > 0 else RED))
 
-        stdscr.attron(curses.color_pair(BLUE_ON_WHITE))
+        stdscr.attron(curses.color_pair(BLACK_ON_YELLOW))
         stdscr.addstr(height-1, 0, " " * (width - 1))        
         stdscr.addstr(height-1, 0, 'q: Exit   r: Refresh')
         stdscr.addstr(height-1, width-len(lastUpdate)-1, lastUpdate)
