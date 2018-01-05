@@ -2,6 +2,7 @@
 
 ## How to use
 ``` sh
+pip install -r requirements.txt
 git clone https://github.com/emanuelelongo/cryptowatch.git
 cd cryptowatch
 vim settings.py
