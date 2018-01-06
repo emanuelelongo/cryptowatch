@@ -70,7 +70,7 @@ def window(stdscr, balances, prices, balancesInEur, totalInEur, totalInvested, l
         stdscr.addstr(i+4, 60, 'EUR ' + formatMoney(-totalInvested))
 
         stdscr.addstr(i+5, 53, 'Profit', curses.color_pair(WHITE))
-        profit = balances.get('EUR', 0) + totalInEur - totalInvested
+        profit = totalInEur - totalInvested
         stdscr.addstr(i+5, 60, 'EUR ' + formatMoney(profit), curses.color_pair(GREEN if profit > 0 else RED))
 
         stdscr.attron(curses.color_pair(BLACK_ON_YELLOW))
